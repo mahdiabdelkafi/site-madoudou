@@ -2,9 +2,5 @@
   "buildCommand": "npm run build",
   "framework": "vite",
   "outputDirectory": "dist/client",
-  "functions": {
-    "dist/server/server.js": {
-      "runtime": "nodejs22.x"
-    }
-  }
+ 
 }
