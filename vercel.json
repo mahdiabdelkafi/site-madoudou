@@ -6,10 +6,5 @@
       "runtime": "nodejs22.x"
     }
   },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/dist/server/server.js"
-    }
-  ]
+
 }
