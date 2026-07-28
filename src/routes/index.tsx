@@ -34,14 +34,21 @@ const articles = [
 
 function Index() {
 	const [formData, setFormData] = useState({ nom: "", email: "", telephone: "", message: "" });
-	const handleFormChange = (field: string) => (e) => {
-  setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-};
-const handleFormSubmit = (e) => {
-  e.preventDefault();
-  const texte = `Nom : ...  Email : ...  Téléphone : ...  Message : ...`;
-  window.open(`https://wa.me/21698687981?text=${texte}`, "_blank");
-};
+
+  const handleFormChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const texte =
+      `Nouvelle demande de rendez-vous%0A%0A` +
+      `Nom : ${encodeURIComponent(formData.nom)}%0A` +
+      `Email : ${encodeURIComponent(formData.email)}%0A` +
+      `Téléphone : ${encodeURIComponent(formData.telephone)}%0A` +
+      `Message : ${encodeURIComponent(formData.message)}`;
+    window.open(`https://wa.me/21698687981?text=${texte}`, "_blank");
+  };
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="hidden md:flex items-center justify-between px-8 py-3 text-sm border-b border-border bg-background">
@@ -85,7 +92,7 @@ const handleFormSubmit = (e) => {
             Chef de service à l'hopital Hadj Ali Soua Ksar Hellal.
           </p>
          <a
-  href="https://wa.me/21698540006?text=Bonjour%20Docteur,%20je%20souhaite%20prendre%20un%20rendez-vous."
+  href="https://wa.me/21698687981?text=Bonjour%20Docteur,%20je%20souhaite%20prendre%20un%20rendez-vous."
   target="_blank"
   rel="noopener noreferrer"
   className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium shadow-lg hover:scale-105 transition"
@@ -200,12 +207,12 @@ const handleFormSubmit = (e) => {
             </div>
           </div>
           <form className="bg-card text-card-foreground p-8 rounded-2xl space-y-4" onSubmit={handleFormSubmit}>
-            <input type="text" placeholder="Votre nom" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" value={formData.nom} onChange={handleFormChange("nom")} />
-            <input type="email" required value={formData.email}  placeholder="Votre adresse e-mail" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" onChange={handleFormChange("email")} />
-            <input type="tel" required value={formData.telephone} placeholder="Numéro de téléphone" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" onChange={handleFormChange("telephone")} />
-            <textarea placeholder="Votre message" rows={5} value={formData.message} onChange={handleFormChange("message")} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent resize-none" />
-            <button type="submit" className="w-full bg-accent text-accent-foreground py-3 rounded-lg font-medium hover:opacity-90 transition">Envoyer ma demande</button>
-          </form>
+  <input type="text" required value={formData.nom} onChange={handleFormChange("nom")} placeholder="Votre nom" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" />
+  <input type="email" required value={formData.email} onChange={handleFormChange("email")} placeholder="Votre adresse e-mail" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" />
+  <input type="tel" required value={formData.telephone} onChange={handleFormChange("telephone")} placeholder="Numéro de téléphone" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent" />
+  <textarea placeholder="Votre message" rows={5} value={formData.message} onChange={handleFormChange("message")} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent resize-none" />
+  <button type="submit" className="w-full bg-accent text-accent-foreground py-3 rounded-lg font-medium hover:opacity-90 transition">Envoyer ma demande</button>
+</form>
         </div>
       </section>
 
